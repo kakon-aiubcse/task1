@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement()) // Unique identifier for each user
+  name      String   // User's name
+  email     String   @unique // User's email, must be unique
+  mobile    String   @unique // User's mobile number, must be unique
+  password  String   // User's password
+  createdAt DateTime @default(now()) // Timestamp for when the user was created
+  updatedAt DateTime @updatedAt // Timestamp for when the user was last updated
+
+  @@map("users") // Optional: Map to a specific table name in the database
+}
+
+model Bookings {
+  id            Int       @id @default(autoincrement())
+  name          String
+  passportNumber String
+  validDate     DateTime
+  netAmount     Float
+  paidAmount    Float
+  paymentStatus PaymentStatus
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+enum PaymentStatus {
+  PAID_PARTIAL
+  PENDING_PARTIAL
+}
+

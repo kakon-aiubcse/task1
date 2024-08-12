@@ -1,0 +1,8 @@
+ekta table 
+user
+column : name, email, mobile number, password, created at , updated at, 
+
+
+arekta table 
+bookings
+column: a name, passport number, valid date, net amount, paid amount , payment status(enum paid partial, pending partial )
